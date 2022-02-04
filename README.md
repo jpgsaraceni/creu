@@ -133,4 +133,52 @@ LLEN mylist
 # (integer) 4
 ```
 
-### `SADD` 
+### `SADD` adds an element to a set
+
+Sets are similar to lists, except they aren't ordered and elements must be unique.
+
+```shell
+SADD setkey "first value" # (integer) 1
+SADD setkey "also" "variadic" # (integer) 2
+SADD setkey "first value" # (integer) 0
+```
+
+### `SREM` removes an element from a set
+
+Returns 1 if removed or 0 if not present
+
+```shell
+SREM setkey "second value" # (integer) 0
+SREM setkey "first value" # (integer) 1
+```
+
+### Oher set operations
+
+```shell
+SISMEMBER setkey "also" # (integer) 1
+SISMEMBER setkey "something not in set" # (integer) 0
+SMEMBERS setkey # 1) "also", 2) "variadic"
+SUNION setkey existentset # 1) "also", 2) "variadic", 3) "elements from second set"
+SPOP setkey 1 # 1) "also" ## randomly pops number of elements equal to argument
+SRANDOM setkey 2 # 1) "also", 2) "variadic"
+```
+
+### Sorted sets
+
+```shell
+ZADD sortedset 10 "element with score 10"
+ZADD sortedset 101 "element with score 101"
+ZRANGE sortedset 0 -1 # 1) "element with score 10", 2) "element with score 101"
+```
+
+### Hashes
+
+```shell
+HSET myobject name "cool name" # 1
+HSET myobject email "cool@email.com" # 1
+HGETALL myobject # 1) "name", 2) "cool name", 3) "email", 4) "cool@email.com"
+HGET myobject name # "cool name"
+HSET myobject count 5 # 1
+HINCRBY myobject count 6 # (integer) 11
+HDEL myobject count # (integer) 1
+```
