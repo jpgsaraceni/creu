@@ -4,9 +4,47 @@ Concepts for REdis Usage (créu) is my study repository for basic Redis concepts
 
 [Redis](https://redis.io/) is an in-memory, key-value data store, used primarily for cache and message broking.
 
-## Basic CLI commands
+## Install Redis
 
-Based on Redis official website [tutorial](https://try.redis.io/)
+Redis oficial website [quick start](https://redis.io/topics/quickstart) suggests compiling from source (calm down, it's easy) Note: Redis has no oficial support for windows.
+
+(good practice to do this in /usr/local)
+
+```shell
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+cd redis-stable
+make
+```
+
+Put binaries in right place
+
+```shell
+sudo make install
+```
+
+## Start redis server
+
+```shell
+redis-server
+```
+
+## CLI
+
+With a redis server running, execute:
+
+```shell
+redis-cli
+```
+
+You can check if Redis CLI is working correctly by pinging:
+
+```console
+127.0.0.1:6379> PING
+PONG
+```
+
+Basic CLI commands (based on Redis official website [tutorial](https://try.redis.io/):
 
 ### `SET` to write a new key-value pair
 
