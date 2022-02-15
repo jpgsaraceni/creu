@@ -6,30 +6,35 @@ Concepts for REdis Usage (créu) is my study repository for basic Redis concepts
 
 ## Contents
 
-- [Install Redis](#install-redis) 
+- [Install Redis](#install-redis)
 - [Start Redis Server](#start-redis-server)
 - [CLI](#cli)
   - [SET](#set-to-write-a-new-key-value-pair)
-  - [GET](https://github.com/jpgsaraceni/creu/edit/main/README.md#get-to-read-the-value-of-a-key)
-  - [EXISTS](https://github.com/jpgsaraceni/creu/edit/main/README.md#exists-to-check-if-key-exists)
-  - [DEL](https://github.com/jpgsaraceni/creu/edit/main/README.md#del-to-delete-a-key)
-  - [INCR and DECR](https://github.com/jpgsaraceni/creu/edit/main/README.md#incr-and-decr-to-increment-or-decrement-the-value-of-a-key)
-  - [EXPIRE](https://github.com/jpgsaraceni/creu/edit/main/README.md#expire-and-pexpire-to-set-number-of-seconds-or-milliseconds-until-a-key-is-deleted)
-  - [TTL](https://github.com/jpgsaraceni/creu/edit/main/README.md#ttl-and-pttl-to-get-remaining-seconds-or-milliseconds-until-a-key-expires)
-  - [RPUSH and LPUSH](https://github.com/jpgsaraceni/creu/edit/main/README.md#rpush-and-lpush-push-a-new-element-to-an-ordered-list-and-return-length-of-list)
-  - [LRANGE](https://github.com/jpgsaraceni/creu/edit/main/README.md#lrange-reads-a-subset-of-the-list)
-  - [LPOP and RPOP](https://github.com/jpgsaraceni/creu/edit/main/README.md#lpop-and-rpop-remove-and-return-an-element-from-a-list)
-  - [LLEN](https://github.com/jpgsaraceni/creu/edit/main/README.md#llen-returns-the-number-of-elements-in-a-list)
-  - [SADD](https://github.com/jpgsaraceni/creu/edit/main/README.md#sadd-adds-an-element-to-a-set)
-  - [SREM](https://github.com/jpgsaraceni/creu/edit/main/README.md#srem-removes-an-element-from-a-set)
-  - [Other operations with sets](https://github.com/jpgsaraceni/creu/edit/main/README.md#oher-set-operations)
-  - [Sorted sets](https://github.com/jpgsaraceni/creu/edit/main/README.md#sorted-sets)
-  - [Hashes](https://github.com/jpgsaraceni/creu/edit/main/README.md#hashes)
+  - [GET](#get-to-read-the-value-of-a-key)
+  - [EXISTS](#exists-to-check-if-key-exists)
+  - [DEL](#del-to-delete-a-key)
+  - [INCR and DECR](#incr-and-decr-to-increment-or-decrement-the-value-of-a-key)
+  - [EXPIRE](#expire-and-pexpire-to-set-number-of-seconds-or-milliseconds-until-a-key-is-deleted)
+  - [TTL](#ttl-and-pttl-to-get-remaining-seconds-or-milliseconds-until-a-key-expires)
+  - [TYPE](#type-to-get-the-type-of-the-value-stored-in-a-key)
+  - [RPUSH and LPUSH](#rpush-and-lpush-push-a-new-element-to-an-ordered-list-and-return-length-of-list)
+  - [LRANGE](#lrange-reads-a-subset-of-the-list)
+  - [LPOP and RPOP](#lpop-and-rpop-remove-and-return-an-element-from-a-list)
+  - [LLEN](#llen-returns-the-number-of-elements-in-a-list)
+  - [SADD](#sadd-adds-an-element-to-a-set)
+  - [SREM](#srem-removes-an-element-from-a-set)
+  - [Other operations with sets](#oher-set-operations)
+  - [Sorted sets](#sorted-sets)
+  - [Hashes](#hashes)
 - [Scripts](#scripts)
+- [Redis Data Types](#redis-data-types)
+  - [Redis Lists](#redis-lists)
+    - [LTRIM](#ltrim)
+    - [BRPOP and BLPOP](#brpop-and-blpop)
 
 ## Install Redis
 
-Redis oficial website [quick start](https://redis.io/topics/quickstart) suggests compiling from source (calm down, it's easy) Note: Redis has no oficial support for windows.
+Redis oficial website [quick start](https://redis.io/topics/quickstart) suggests compiling from source (calm down, it's easy). Note: Redis has no oficial support for windows.
 
 (good practice to do this in /usr/local)
 
@@ -147,6 +152,12 @@ SET expiresfast EX 1
 PERSIST expiresfast
 ```
 
+### `TYPE` to get the type of the value stored in a key
+
+```shell
+TYPE newkey # integer
+```
+
 ### `RPUSH` and `LPUSH` push a new element to an ordered list, and return length of list
 
 If the list does not yet exist, it is created.
@@ -246,5 +257,40 @@ HDEL myobject count # (integer) 1
 
 ## Scripts
 
+Shell scripts to show some simple examples. You can run a file directly in your terminal or just copy commands individually.
+
 - [Installing Redis](https://github.com/jpgsaraceni/creu/blob/main/scripts/install.sh)
 - [Example of GET and SET commands](https://github.com/jpgsaraceni/creu/blob/main/scripts/set_and_get.sh)
+- [Example of JavaScript object as Redis hash](https://github.com/jpgsaraceni/creu/blob/main/scripts/hash.sh)
+- [Example of setting a key with TTL](https://github.com/jpgsaraceni/creu/blob/main/scripts/ttl.sh)
+- [Example of redis list](https://github.com/jpgsaraceni/creu/blob/main/scripts/redis_list.sh)
+- [Example of set TODO:]
+- [Example of bitmap TODO:]
+
+## Redis Data Types
+
+Notes from Redis Data Types [Introduction](https://redis.io/topics/data-types-intro)
+
+Redis Keys are binary safe, which means they can take any binary representable value. Documentation suggests not using very long nor very short keys, so prize for readability.
+
+### Redis Lists
+
+Redis Lists are linked lists, meaning they are fast to access near ends but slow to access deeper into the middle of large lists.
+
+#### `LTRIM`
+
+Maintain only elements in specified range, deleting others
+
+```shell
+LPUSH myList 0 1 2 3 4 5 6 7
+LTRIM 0 4 # myList => 0, 1, 2, 3, 4
+```
+
+#### `BRPOP and BLPOP`
+
+Wait until an element is added to a list (or timeout is reached) to pop.
+
+```shell
+BRPOP mylist 10 
+# waits for 10 seconds. Returns key and element
+```
