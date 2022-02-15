@@ -25,6 +25,7 @@ Concepts for REdis Usage (créu) is my study repository for basic Redis concepts
   - [Other operations with sets](https://github.com/jpgsaraceni/creu/edit/main/README.md#oher-set-operations)
   - [Sorted sets](https://github.com/jpgsaraceni/creu/edit/main/README.md#sorted-sets)
   - [Hashes](https://github.com/jpgsaraceni/creu/edit/main/README.md#hashes)
+- [Scripts](#scripts)
 
 ## Install Redis
 
@@ -242,3 +243,8 @@ HSET myobject count 5 # 1
 HINCRBY myobject count 6 # (integer) 11
 HDEL myobject count # (integer) 1
 ```
+
+## Scripts
+
+- [Installing Redis](https://github.com/jpgsaraceni/creu/blob/main/scripts/install.sh)
+- [Example of GET and SET commands](https://github.com/jpgsaraceni/creu/blob/main/scripts/set_and_get.sh)
