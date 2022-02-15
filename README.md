@@ -4,6 +4,28 @@ Concepts for REdis Usage (créu) is my study repository for basic Redis concepts
 
 [Redis](https://redis.io/) is an in-memory, key-value data store, used primarily for cache and message broking.
 
+## Contents
+
+- [Install Redis](#install-redis) 
+- [Start Redis Server](#start-redis-server)
+- [CLI](#cli)
+  - [SET](#set-to-write-a-new-key-value-pair)
+  - [GET](https://github.com/jpgsaraceni/creu/edit/main/README.md#get-to-read-the-value-of-a-key)
+  - [EXISTS](https://github.com/jpgsaraceni/creu/edit/main/README.md#exists-to-check-if-key-exists)
+  - [DEL](https://github.com/jpgsaraceni/creu/edit/main/README.md#del-to-delete-a-key)
+  - [INCR and DECR](https://github.com/jpgsaraceni/creu/edit/main/README.md#incr-and-decr-to-increment-or-decrement-the-value-of-a-key)
+  - [EXPIRE](https://github.com/jpgsaraceni/creu/edit/main/README.md#expire-and-pexpire-to-set-number-of-seconds-or-milliseconds-until-a-key-is-deleted)
+  - [TTL](https://github.com/jpgsaraceni/creu/edit/main/README.md#ttl-and-pttl-to-get-remaining-seconds-or-milliseconds-until-a-key-expires)
+  - [RPUSH and LPUSH](https://github.com/jpgsaraceni/creu/edit/main/README.md#rpush-and-lpush-push-a-new-element-to-an-ordered-list-and-return-length-of-list)
+  - [LRANGE](https://github.com/jpgsaraceni/creu/edit/main/README.md#lrange-reads-a-subset-of-the-list)
+  - [LPOP and RPOP](https://github.com/jpgsaraceni/creu/edit/main/README.md#lpop-and-rpop-remove-and-return-an-element-from-a-list)
+  - [LLEN](https://github.com/jpgsaraceni/creu/edit/main/README.md#llen-returns-the-number-of-elements-in-a-list)
+  - [SADD](https://github.com/jpgsaraceni/creu/edit/main/README.md#sadd-adds-an-element-to-a-set)
+  - [SREM](https://github.com/jpgsaraceni/creu/edit/main/README.md#srem-removes-an-element-from-a-set)
+  - [Other operations with sets](https://github.com/jpgsaraceni/creu/edit/main/README.md#oher-set-operations)
+  - [Sorted sets](https://github.com/jpgsaraceni/creu/edit/main/README.md#sorted-sets)
+  - [Hashes](https://github.com/jpgsaraceni/creu/edit/main/README.md#hashes)
+
 ## Install Redis
 
 Redis oficial website [quick start](https://redis.io/topics/quickstart) suggests compiling from source (calm down, it's easy) Note: Redis has no oficial support for windows.
