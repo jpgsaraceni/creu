@@ -34,7 +34,7 @@ Concepts for REdis Usage (créu) is my study repository for basic Redis concepts
 
 ## Install Redis
 
-Redis oficial website [quick start](https://redis.io/topics/quickstart) suggests compiling from source (calm down, it's easy). Note: Redis has no oficial support for windows.
+Redis official website [quick start](https://redis.io/topics/quickstart) suggests compiling from source (calm down, it's easy). Note: Redis has no official support for windows.
 
 (good practice to do this in /usr/local)
 
